@@ -171,8 +171,6 @@ void wait_task(const char *download_dir, Context *context) {
 }
 
 int main(int argc, char **argv) {
-
-
     if (argc != 4) {
         fprintf(stderr, "usage: ./downloader url_file num_workers download_dir\n");
         exit(1);
@@ -194,28 +192,30 @@ int main(int argc, char **argv) {
     // spawn threads and create work queue(s)
     Context *context = spawn_workers(num_workers);
 
+    //All threads are now accessing the same variables. This means that they're all acessing work, and getting their own thingy thing.
+    //3000 Bees attacking a bear.
+
     int work = 0;
-    while ((len = getline(&line, &len, fp)) != -1) {
+    while ((len = getline(&line, &len, fp)) != -1) { //Return number of chars read
 
         if (line[len - 1] == '\n') {
             line[len - 1] = '\0';
         }
 
         ++work;
-        queue_put(context->todo, new_task(line));
+        queue_put(context->todo, new_task(line)); //New task on a worker to download the current line of the opened file
 
         // If we've filled the queue up enough, start getting results back
-        if (work >= num_workers) {
-            --work;
-            wait_task(download_dir, context);
+        if (work >= num_workers) { //Wait for threads to become available.
+            --work; //We've finished one thread
+            wait_task(download_dir, context); //Wait for a thread to become available
         }
     }
 
-    while (work > 0) {
-        --work;
-        wait_task(download_dir, context);
+    while (work > 0) { //While we still have threads waiting to finish
+        --work; //'Finish' one thread
+        wait_task(download_dir, context); //Wait for task to finish
     }
-
 
     //cleanup
     fclose(fp);

@@ -1,0 +1,3 @@
+/home/luke/CLionProjects/ENCE360ASS1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/luke/CLionProjects/ENCE360ASS1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/luke/CLionProjects/ENCE360ASS1/cmake-build-debug/CMakeFiles/untitled.dir

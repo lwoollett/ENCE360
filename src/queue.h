@@ -14,7 +14,7 @@ typedef struct QueueStruct Queue;
 /*
  * queue_alloc:
  *
- * Allocate a concurrent queue of a specific size.
+ * Allocate a concurrent queue of a specific n_threads.
  *
  */
 
@@ -25,7 +25,7 @@ Queue *queue_alloc(int size);
  *
  * Free a concurrent queue and associated memory.
  *
- * Don't call this function while the queue is still in use.
+ * Don't call this function while the queue is still in mutex.
  * (Note, this is a pre-condition to the function and does not need
  * to be checked)
  */

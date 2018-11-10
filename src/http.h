@@ -34,7 +34,7 @@ Buffer* http_query(char *host, char *page, int port);
  *
  * Separate the content from the header of an http request.
  * NOTE: returned string is an offset into the response, so
- * should not be freed by the user. Do not copy the data.
+ * should not be freed by the user. Do not copy the base.
  *
  * return NULL on failure (i.e. the buffer passed in is not a HTTP response)
  *
